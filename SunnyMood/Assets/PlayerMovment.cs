@@ -23,7 +23,6 @@ public class PlayerMovment : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (System.Math.Abs(direction) > 0.1f)
         rb2D.velocity = new Vector2(direction * horizSpeed, 0.0f);
     }
 }
