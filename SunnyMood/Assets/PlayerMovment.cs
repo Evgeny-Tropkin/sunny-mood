@@ -11,7 +11,7 @@ public class PlayerMovment : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        horizSpeed = 0.2f;
+        horizSpeed = 5.0f;
         rb2D = gameObject.GetComponent<Rigidbody2D>();
     }
 
@@ -24,6 +24,6 @@ public class PlayerMovment : MonoBehaviour
     void FixedUpdate()
     {
         if (System.Math.Abs(direction) > 0.1f)
-        rb2D.AddForce(new Vector2(direction * horizSpeed, 0f), ForceMode2D.Impulse);
+        rb2D.velocity = new Vector2(direction * horizSpeed, 0.0f);
     }
 }
