@@ -9,6 +9,7 @@ public class PlayerMovment : MonoBehaviour
     private Rigidbody2D rb2D;
     private float lastDirection;
     private SpriteRenderer sprtRend;
+    private bool isOnThePlatform = true;
 
     // Start is called before the first frame update
     void Start()
@@ -39,5 +40,21 @@ public class PlayerMovment : MonoBehaviour
     {
         sprtRend.flipX = !sprtRend.flipX;
         lastDirection *= -1;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Platform")
+        {
+            isOnThePlatform = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Platform")
+        {
+            isOnThePlatform = false;
+        }
     }
 }
