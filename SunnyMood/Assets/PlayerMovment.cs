@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerMovment : MonoBehaviour
 {
     private float direction;
+    private float upDown;
     private float horizSpeed;
+    private float vertSpeed;
     private Rigidbody2D rb2D;
     private float lastDirection;
     private SpriteRenderer sprtRend;
@@ -14,7 +16,8 @@ public class PlayerMovment : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        horizSpeed = 5.0f;
+        horizSpeed = 12.0f;
+        vertSpeed = 400.0f;
         rb2D = gameObject.GetComponent<Rigidbody2D>();
         sprtRend = gameObject.GetComponent<SpriteRenderer>();
         lastDirection = 1.0f;
@@ -24,6 +27,7 @@ public class PlayerMovment : MonoBehaviour
     void Update()
     {
         direction = Input.GetAxisRaw("Horizontal");
+        upDown = Input.GetAxisRaw("Vertical");
     }
 
     void FixedUpdate()
@@ -34,6 +38,10 @@ public class PlayerMovment : MonoBehaviour
             Flip();
         }
         rb2D.velocity = new Vector2(direction * horizSpeed, 0.0f);
+        if (isOnThePlatform)
+        {
+            rb2D.AddForce(new Vector2(0.0f, upDown * vertSpeed), ForceMode2D.Impulse);
+        }
     }
 
     void Flip()
